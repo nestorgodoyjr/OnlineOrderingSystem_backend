@@ -11,8 +11,15 @@ const userController = {
                     email: user.email
                 }
             })
-        }
-)}
+    }),
+    readAll : asyncHandler( async( req, res) => {
+        const user = await userServices.readAll()
+            res.status(200).json({
+                success: true,
+                data: user
+            })
+    }),
+}
 
 
 export default userController

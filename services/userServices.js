@@ -10,5 +10,12 @@ export const userServices = {
         }
         const user = await userRepository.createUser(userData)
         return user
-    })
+    }),
+    readAll: asyncHandler( async(userData) => {
+        const user = await userRepository.readAll()
+        if(!user){
+            throw new CustomError('No Users found!', 400)
+        }
+        return user
+    }),
 }
