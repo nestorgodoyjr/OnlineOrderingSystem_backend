@@ -1,17 +1,17 @@
 import express from 'express'
+import protect from '../middlewares/authMiddleware.js'
 import userController from "../controllers/userControllers.js";
 
 const router = express.Router()
 
 router
     .route('/user')
-    .post(userController.register)
-    .get(userController.readAll)
+    .get(protect, userController.readAll)
 
 router
     .route('/user/:id')
-    .get(userController.readById)
-    .put(userController.updateById)
-    .delete(userController.delete)
+    .get(protect, userController.readById)
+    .put(protect, userController.updateById)
+    .delete(protect, userController.delete)
 
 export default router
