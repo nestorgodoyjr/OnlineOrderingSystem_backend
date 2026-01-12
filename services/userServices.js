@@ -20,10 +20,25 @@ export const userServices = {
         return user
     }),
     readById: asyncHandler( async(id) => {
-        const user = await userRepository.readById(id)
         
         if(!mongoose.isValidObjectId(id)){
             throw new CustomError('Not a valid ID', 400)
+        }
+
+        const user = await userRepository.readById(id)
+
+        return user
+    }),
+    updateById: asyncHandler( async(id, updateData) => {
+        
+        if(!mongoose.isValidObjectId(id)){
+            throw new CustomError('Not a valid ID', 400)
+        }
+
+        const user = await userRepository.updateById(id, updateData)
+
+        if(!user){
+            throw new CustomError('No User Found!', 400)
         }
 
         return user

@@ -1,5 +1,4 @@
 import User from "../models/User.js";
-import CustomError from "../utils/CustomError.js";
 
 export const userRepository = {
     createUser : async (userData) => {
@@ -15,8 +14,10 @@ export const userRepository = {
     findByEmail : async (email) => {
         return await User.findOne({email}).select('+password')
     },
-    updateById : async () => {
-        
+    updateById : async (id, updateData) => {
+        const user = await User.findById(id)
+        Object.assign(user, updateData)
+        return await user.save()
     },
     delete : async (id) => {
        
