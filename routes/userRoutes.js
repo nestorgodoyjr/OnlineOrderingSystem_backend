@@ -8,4 +8,8 @@ router
     .post(userController.register)
     .get(userController.readAll)
 
+router
+    .route('/user/:id')
+    .get(userController.readById)
+
 export default router

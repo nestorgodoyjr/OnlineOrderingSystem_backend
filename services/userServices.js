@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import { userRepository } from "../repositories/userRepository.js";
 import CustomError from '../utils/CustomError.js';
+import mongoose from 'mongoose';
 
 export const userServices = {
     register: asyncHandler( async(userData) => {
@@ -11,11 +12,20 @@ export const userServices = {
         const user = await userRepository.createUser(userData)
         return user
     }),
-    readAll: asyncHandler( async(userData) => {
+    readAll: asyncHandler( async() => {
         const user = await userRepository.readAll()
         if(!user){
             throw new CustomError('No Users found!', 400)
         }
+        return user
+    }),
+    readById: asyncHandler( async(id) => {
+        const user = await userRepository.readById(id)
+        
+        if(!mongoose.isValidObjectId(id)){
+            throw new CustomError('Not a valid ID', 400)
+        }
+
         return user
     }),
 }

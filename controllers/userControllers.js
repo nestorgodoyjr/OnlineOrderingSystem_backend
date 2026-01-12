@@ -19,6 +19,13 @@ const userController = {
                 data: user
             })
     }),
+    readById : asyncHandler( async( req, res) => {
+        const user = await userServices.readById(req.params.id)
+            res.status(200).json({
+                success: true,
+                data: user
+            })
+    }),
 }
 
 

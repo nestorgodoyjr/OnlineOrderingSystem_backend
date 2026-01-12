@@ -9,8 +9,8 @@ export const userRepository = {
     readAll : async () => {
         return await User.find()
     },
-    readById : async () => {
-        
+    readById : async (id) => {
+        return User.findById(id)
     },
     findByEmail : async (email) => {
         return await User.findOne({email}).select('+password')
@@ -18,7 +18,7 @@ export const userRepository = {
     updateById : async () => {
         
     },
-    delete : async (userData) => {
+    delete : async (id) => {
        
         
     }
