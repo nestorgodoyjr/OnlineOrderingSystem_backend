@@ -20,7 +20,6 @@ export const userRepository = {
         return await user.save()
     },
     delete : async (id) => {
-       
-        
+       return User.findByIdAndDelete(id)
     }
 }

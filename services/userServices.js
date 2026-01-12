@@ -43,4 +43,18 @@ export const userServices = {
 
         return user
     }),
+    deleteById: asyncHandler( async(id) => {
+        
+        if(!mongoose.isValidObjectId(id)){
+            throw new CustomError('Not a valid ID', 400)
+        }
+
+        const user = await userRepository.delete(id)
+
+        if(!user){
+            throw new CustomError('No User Found', 400)
+        }
+
+        return user
+    }),
 }

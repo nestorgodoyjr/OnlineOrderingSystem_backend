@@ -12,5 +12,6 @@ router
     .route('/user/:id')
     .get(userController.readById)
     .put(userController.updateById)
+    .delete(userController.delete)
 
 export default router

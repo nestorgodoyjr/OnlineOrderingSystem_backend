@@ -33,6 +33,19 @@ const userController = {
                 data: user
             })
     }),
+    delete : asyncHandler( async( req, res) => {
+        const user = await userServices.deleteById(req.params.id)
+            res.status(200).json({
+                success: true,
+                message: 'Deleted User:',
+                data: {
+                    id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    role: user.role
+                }
+            })
+    }),
 }
 
 
