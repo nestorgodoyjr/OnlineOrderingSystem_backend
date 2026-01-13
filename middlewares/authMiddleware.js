@@ -18,10 +18,13 @@ const protect = asyncHandler(async(req,res,next) => {
     if( !token ){
         throw new CustomError('Unauthorized, no token', 401)
     }
-
+    try{
     const decoded = jwt.verify(token, JWT_SECRET)
     req.user = await User.findById(decoded.id)
     next()
+    }catch(error){
+        throw new CustomError('Token expired, or invalid', 401)
+    }
 })
 
 export default protect
