@@ -12,4 +12,12 @@ router
     .route('/auth/register')
     .post(authController.register)
 
+router
+    .route('/auth/refresh')
+    .post(authController.refresh)
+
+router
+    .route('/auth/logout')
+    .post( protect, authController.logout)
+
 export default router
